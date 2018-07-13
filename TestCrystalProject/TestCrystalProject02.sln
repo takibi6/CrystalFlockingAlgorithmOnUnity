@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCrystalProject02", "TestCrystalProject02.csproj", "{5537139C-0380-4042-CC55-FFFB5BE0F684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCrystalProject02.Editor", "TestCrystalProject02.Editor.csproj", "{A0C93CB4-4964-52D9-1DC9-2ED4F1F5C904}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5537139C-0380-4042-CC55-FFFB5BE0F684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5537139C-0380-4042-CC55-FFFB5BE0F684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5537139C-0380-4042-CC55-FFFB5BE0F684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5537139C-0380-4042-CC55-FFFB5BE0F684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C93CB4-4964-52D9-1DC9-2ED4F1F5C904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C93CB4-4964-52D9-1DC9-2ED4F1F5C904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C93CB4-4964-52D9-1DC9-2ED4F1F5C904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C93CB4-4964-52D9-1DC9-2ED4F1F5C904}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

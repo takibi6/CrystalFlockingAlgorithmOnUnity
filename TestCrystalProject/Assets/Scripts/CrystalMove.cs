@@ -14,7 +14,7 @@ public class CrystalMove : MonoBehaviour {
     }
 	
 	void Update () {
-        velocity = Vector3.zero;
+        InitParam();
 
         SearchCrystals();
         DoCohesion();
@@ -24,45 +24,52 @@ public class CrystalMove : MonoBehaviour {
         RotateCrystal(velocity);
 	}
 
+    void InitParam()
+    {
+        velocity = Vector3.zero;
+        averagePosition = Vector3.zero;
+        averageVelocity = Vector3.zero;
+    }
 
     //探索
     void SearchCrystals()
     {
         //if (transform.GetSiblingIndex() != 0) return;   //テスト用
-
         int count = 0;
-        averagePosition = Vector3.zero;
-        averageVelocity = Vector3.zero;
 
         for (int i = 0; i < managerClass.crystalNum; i++)
         {
-            if (i != transform.GetSiblingIndex())   //自分自身を探索しない
-            {
+            //if (i != transform.GetSiblingIndex())   //自分自身を探索しない
+            //{
                 Vector3 diffVector = this.transform.position - managerClass.crystalObjects[i].transform.position;
 
-                if (InView(diffVector))                      //視界内だったら
-                {
+                //if (InView(diffVector))                      //視界内だったら
+                //{
                     averagePosition += managerClass.crystalObjects[i].transform.position;
                     averageVelocity += managerClass.crystalClasses[i].velocity;
                     count++;
-
-                    //分離処理
-                    DoSeparation(diffVector);
-                }
-            }
+                //}
+                //分離処理
+                //DoSeparation(diffVector);
+                DoSeparationAll(diffVector, i);
+            //}
         }
 
         //平均を出す
         if (count > 0)
         {
+            //averagePosition += managerClass.targetObject.transform.position - transform.position;
+            //count++;
             averagePosition /= count;   //平均位置（自身を含めない）
             averageVelocity /= count;
         }
         //対象がいなかった場合、リーダー位置へ向かう（平均しない）
         else
         {
-            averagePosition = managerClass.targetObject.transform.position;
+            Vector3 diff = managerClass.targetObject.transform.position - transform.position;
+            averagePosition = diff;
         }
+        averagePosition = managerClass.targetObject.transform.position - transform.position;  //デバッグ用、全員ターゲットを目指す
 
         if (transform.GetSiblingIndex() != 0) return;   //テスト用
         managerClass.centerMark.transform.position = averagePosition;   //確認用マーカーを動かす
@@ -89,7 +96,6 @@ public class CrystalMove : MonoBehaviour {
         //Vector3 diff = averagePosition - this.transform.position;
         //if (diff.magnitude < managerClass.keepDistance) return;     //分離を優先
         
-        //this.transform.position += diff * Time.deltaTime * managerClass.moveSpeed;
         velocity = velocity * managerClass.disorder + averagePosition * (1f - managerClass.disorder);
     }
 
@@ -99,17 +105,29 @@ public class CrystalMove : MonoBehaviour {
     {
         if (diff.magnitude > managerClass.keepDistance) return;
         //Debug.Log(diff.magnitude);
-
+        
         float removeVelocity = managerClass.keepDistance / diff.magnitude;
-        //this.transform.Translate(diff.normalized * Time.deltaTime * removeVelocity);
         velocity += diff.normalized * removeVelocity;
+    }
+
+    //分離：一定距離を保つ    デバッグ用
+    void DoSeparationAll(Vector3 diff, int i)
+    {
+        if (i != transform.GetSiblingIndex())   //自分自身を探索しない
+        {
+            Vector3 diffVector = this.transform.position - managerClass.crystalObjects[i].transform.position;
+            
+            if (diff.magnitude > managerClass.keepDistance) return;
+            float removeVelocity = managerClass.keepDistance / diff.magnitude;
+            velocity += diff.normalized * removeVelocity;
+        }
     }
 
 
     //整列：平均速度ベクトルに合わせる
     void DoAlignment()
     {
-        velocity = velocity * managerClass.disorder + averageVelocity * (1f - managerClass.disorder);
+        velocity += velocity * managerClass.disorder + averageVelocity * (1f - managerClass.disorder);
     }
 
 

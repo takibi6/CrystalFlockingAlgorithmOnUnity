@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 25657983}
   - component: {fileID: 25657982}
   - component: {fileID: 25657981}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 25657980}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -230,6 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 25657980}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!23 &381761576
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -244,7 +247,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8a8ff29677db6b546bf15b2da898fd65, type: 2}
+  - {fileID: 2100000, guid: da738ab32b4b50140a6f1966c25e0df9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -502,14 +505,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crystalNum: 30
-  randomSetupPosition: 10
-  searchDistance: 5
-  crystalGetAngle: 0.1
+  randomSetupPosition: 3
+  searchDistance: 1
+  crystalGetAngle: 0.5
   moveSpeed: 1
   lateSpeed: 30
-  keepDistance: 1
-  disorder: 0.9
-  crystalPrefab: {fileID: 1334199070706278, guid: c3986e3d5e630ce4189abd44c05a083f,
+  keepDistance: 5
+  disorder: 0.5
+  crystalPrefab: {fileID: 1009155331820490, guid: 44bb99bd1040757498adb2f1df19903f,
     type: 2}
   targetObject: {fileID: 381761574}
   centerMark: {fileID: 860740159}

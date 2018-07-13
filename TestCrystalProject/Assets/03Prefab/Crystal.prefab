@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4903151033243980}
   - component: {fileID: 114711668736365924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

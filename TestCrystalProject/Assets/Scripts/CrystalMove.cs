@@ -7,6 +7,7 @@ public class CrystalMove : MonoBehaviour {
     CrystalManager managerClass;
     Vector3 averagePosition = Vector3.zero;
     Vector3 averageVelocity = Vector3.zero;
+    //Vector3 acceleration = Vector3.zero;
     Vector3 velocity = Vector3.zero;
 
     void Start () {
@@ -39,20 +40,19 @@ public class CrystalMove : MonoBehaviour {
 
         for (int i = 0; i < managerClass.crystalNum; i++)
         {
-            //if (i != transform.GetSiblingIndex())   //自分自身を探索しない
-            //{
+            if (i != transform.GetSiblingIndex())   //自分自身を探索しない
+            {
                 Vector3 diffVector = this.transform.position - managerClass.crystalObjects[i].transform.position;
 
-                //if (InView(diffVector))                      //視界内だったら
-                //{
+                if (InView(diffVector))                      //視界内だったら
+                {
                     averagePosition += managerClass.crystalObjects[i].transform.position;
                     averageVelocity += managerClass.crystalClasses[i].velocity;
                     count++;
-                //}
+                }
                 //分離処理
-                //DoSeparation(diffVector);
-                DoSeparationAll(diffVector, i);
-            //}
+                DoSeparation(diffVector);
+            }
         }
 
         //平均を出す
@@ -69,7 +69,7 @@ public class CrystalMove : MonoBehaviour {
             Vector3 diff = managerClass.targetObject.transform.position - transform.position;
             averagePosition = diff;
         }
-        averagePosition = managerClass.targetObject.transform.position - transform.position;  //デバッグ用、全員ターゲットを目指す
+        //averagePosition = managerClass.targetObject.transform.position - transform.position;  //デバッグ用、全員ターゲットを目指す
 
         if (transform.GetSiblingIndex() != 0) return;   //テスト用
         managerClass.centerMark.transform.position = averagePosition;   //確認用マーカーを動かす
@@ -108,19 +108,6 @@ public class CrystalMove : MonoBehaviour {
         
         float removeVelocity = managerClass.keepDistance / diff.magnitude;
         velocity += diff.normalized * removeVelocity;
-    }
-
-    //分離：一定距離を保つ    デバッグ用
-    void DoSeparationAll(Vector3 diff, int i)
-    {
-        if (i != transform.GetSiblingIndex())   //自分自身を探索しない
-        {
-            Vector3 diffVector = this.transform.position - managerClass.crystalObjects[i].transform.position;
-            
-            if (diff.magnitude > managerClass.keepDistance) return;
-            float removeVelocity = managerClass.keepDistance / diff.magnitude;
-            velocity += diff.normalized * removeVelocity;
-        }
     }
 
 

@@ -506,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crystalNum: 30
   randomSetupPosition: 3
-  searchDistance: 1
+  searchDistance: 10
   crystalGetAngle: 0.5
   moveSpeed: 1
   lateSpeed: 30

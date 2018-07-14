@@ -505,14 +505,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crystalNum: 30
-  randomSetupPosition: 3
+  randomSetupPosition: 10
   searchDistance: 10
   crystalGetAngle: 0.5
   moveSpeed: 1
   lateSpeed: 30
   keepDistance: 5
   disorder: 0.5
-  crystalPrefab: {fileID: 1009155331820490, guid: 44bb99bd1040757498adb2f1df19903f,
+  crystalPrefab: {fileID: 1334199070706278, guid: c3986e3d5e630ce4189abd44c05a083f,
     type: 2}
   targetObject: {fileID: 381761574}
   centerMark: {fileID: 860740159}

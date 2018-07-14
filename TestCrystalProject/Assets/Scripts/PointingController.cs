@@ -8,6 +8,7 @@ public class PointingController : MonoBehaviour
 {
     public GameObject ground;
     public static Vector3 pointerVector;  //マウスポインタのオブジェクトが動いた距離
+    public LayerMask layer;
 
     public void Start()
     {

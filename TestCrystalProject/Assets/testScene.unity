@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36852cbf00fd42347bcb5944a3834d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crystalNum: 30
+  crystalNum: 10
   randomSetupPosition: 10
   searchDistance: 10
   crystalGetAngle: 0.5

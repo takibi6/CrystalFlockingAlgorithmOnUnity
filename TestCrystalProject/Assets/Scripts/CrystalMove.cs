@@ -5,10 +5,10 @@ using UnityEngine;
 public class CrystalMove : MonoBehaviour {
 
     CrystalManager managerClass;
-    Vector3 averagePosition = Vector3.zero;
-    Vector3 averageVelocity = Vector3.zero;
-    Vector3 acceleration = Vector3.zero;
-    Vector3 velocity = Vector3.zero;
+    Vector3 averagePosition;
+    Vector3 averageVelocity;
+    Vector3 acceleration;
+    Vector3 velocity;
     Vector3 angle;
 
     void Start () {
@@ -27,9 +27,9 @@ public class CrystalMove : MonoBehaviour {
         DoCohesion();
         DoAlignment();
 
-        MoveCrystal();
+        //MoveCrystal();
         RotateCrystal(velocity);
-	}
+    }
 
     void InitParam()
     {

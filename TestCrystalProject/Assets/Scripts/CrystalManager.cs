@@ -9,6 +9,7 @@ public class CrystalManager : MonoBehaviour {
     public float searchDistance;
     public float crystalGetAngle;
     public float moveSpeed;
+    public float toTargetSpeed;
     public float lateSpeed;
     public float keepDistance;
     public float disorder;

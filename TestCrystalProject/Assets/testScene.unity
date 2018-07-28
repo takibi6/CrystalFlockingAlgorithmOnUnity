@@ -508,10 +508,11 @@ MonoBehaviour:
   randomSetupPosition: 10
   searchDistance: 10
   crystalGetAngle: 0.5
-  moveSpeed: 10
+  moveSpeed: 1
+  toTargetSpeed: 1
   lateSpeed: 30
   keepDistance: 5
-  disorder: 0.5
+  disorder: 0
   crystalPrefab: {fileID: 1009155331820490, guid: 44bb99bd1040757498adb2f1df19903f,
     type: 2}
   targetObject: {fileID: 381761574}

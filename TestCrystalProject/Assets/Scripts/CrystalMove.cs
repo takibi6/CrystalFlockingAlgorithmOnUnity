@@ -7,17 +7,19 @@ public class CrystalMove : MonoBehaviour {
     CrystalManager managerClass;
     Vector3 averagePosition;
     Vector3 averageVelocity;
-    Vector3 acceleration;
+    //Vector3 acceleration;
     Vector3 velocity;
-    Vector3 angle;
+    //Vector3 angle;
+    Vector3 destination;
 
     void Start () {
         managerClass = GameObject.Find("Crystals").GetComponent<CrystalManager>();
         averagePosition = Vector3.zero;
         averageVelocity = Vector3.zero;
-        acceleration = Vector3.zero;
+        //acceleration = Vector3.zero;
         velocity = Vector3.zero;
-        angle = Vector3.zero;
+        //angle = Vector3.zero;
+        destination = Vector3.zero;
     }
 	
 	void Update () {
@@ -27,16 +29,17 @@ public class CrystalMove : MonoBehaviour {
         DoCohesion();
         DoAlignment();
 
-        //MoveCrystal();
+        MoveCrystal();
         RotateCrystal(velocity);
     }
 
     void InitParam()
     {
-        acceleration = Vector3.zero;
-        velocity = Vector3.zero;
+        //acceleration = Vector3.zero;
+        //velocity = Vector3.zero;
         averagePosition = Vector3.zero;
         averageVelocity = Vector3.zero;
+        destination = Vector3.zero;
     }
 
     //探索
@@ -105,9 +108,9 @@ public class CrystalMove : MonoBehaviour {
         //Vector3 diff = averagePosition - this.transform.position;
         //if (diff.magnitude < managerClass.keepDistance) return;     //分離を優先
         
-        acceleration = acceleration * managerClass.disorder + averagePosition * (1f - managerClass.disorder);
-        angle = acceleration;
-        //acceleration *= acceleration.magnitude;
+        destination += averagePosition;
+        //angle = destination;
+        //velocity *= velocity.magnitude;
     }
 
 
@@ -118,30 +121,29 @@ public class CrystalMove : MonoBehaviour {
         //Debug.Log(diff.magnitude);
         
         float removeVelocity = managerClass.keepDistance / diff.magnitude;
-        velocity += diff.normalized * removeVelocity;
+        destination += diff.normalized * removeVelocity;
     }
 
 
     //整列：平均速度ベクトルに合わせる
     void DoAlignment()
     {
-        acceleration += acceleration * managerClass.disorder + averageVelocity * (1f - managerClass.disorder);
-        angle += acceleration;
+        destination += averageVelocity;
+        //angle += destination;
     }
 
-
+    
     //動く
     void MoveCrystal()
     {
-        //float tooSpeed = 1f;                    //行きすぎる（後でコントローラーの速度に変える）
-        //velocity += acceleration * tooSpeed;
-        //this.transform.position += velocity * managerClass.moveSpeed * Time.deltaTime;
-        this.transform.position += this.transform.forward * managerClass.moveSpeed * Time.deltaTime;
+        velocity = destination.normalized * managerClass.moveSpeed * Time.deltaTime;
+        this.transform.position += velocity * managerClass.applicability;
     }
 
     //個体の進行方向に合わせて回転させる
     void RotateCrystal(Vector3 velocity)
     {
-        this.transform.LookAt(this.transform.position + angle.normalized);
+        Vector3 rotatePos = this.transform.position + Vector3.Lerp(this.transform.forward, destination.normalized, managerClass.turnRate);
+        this.transform.LookAt(rotatePos);
     }
 }

@@ -9,10 +9,11 @@ public class CrystalManager : MonoBehaviour {
     public float searchDistance;
     public float crystalGetAngle;
     public float moveSpeed;
-    public float toTargetSpeed;
+    public float freeSpeed;
+    public float turnRate;
     public float lateSpeed;
     public float keepDistance;
-    public float disorder;
+    public float applicability;
 
     public GameObject crystalPrefab;
     public GameObject targetObject;
@@ -20,10 +21,12 @@ public class CrystalManager : MonoBehaviour {
 
     public GameObject[] crystalObjects;
     public CrystalMove[] crystalClasses;
+    public Vector3[] crystalVelocity;
 
 	void Start () {
         crystalObjects = new GameObject[crystalNum];
         crystalClasses = new CrystalMove[crystalNum];
+        crystalVelocity = new Vector3[crystalNum];
         Transform crystalParent = GameObject.Find("Crystals").transform;
 
         for (int i = 0; i < crystalNum; i++)
@@ -31,6 +34,7 @@ public class CrystalManager : MonoBehaviour {
             crystalObjects[i] = Instantiate(crystalPrefab, crystalParent);
             crystalObjects[i].transform.position = new Vector3(Random.Range(-randomSetupPosition, randomSetupPosition), Random.Range(-randomSetupPosition, randomSetupPosition), Random.Range(-randomSetupPosition, randomSetupPosition));
             crystalClasses[i] = crystalObjects[i].GetComponent<CrystalMove>();
+            crystalVelocity[i] = Vector3.zero;
         }
 	}
 	

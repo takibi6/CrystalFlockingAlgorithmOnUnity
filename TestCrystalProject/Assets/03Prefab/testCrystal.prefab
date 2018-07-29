@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4386992090935810}
-  - component: {fileID: 114788072644206876}
+  - component: {fileID: 114665433140074420}
   - component: {fileID: 114068462212139682}
   m_Layer: 8
   m_Name: testCrystal
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c860e31a4de63e44e9c8609a52e2fd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114788072644206876
+--- !u!114 &114665433140074420
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -204,6 +204,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1009155331820490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0aef7c17e2d6b4e9bcb9763b6334fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 48b3911bc26fa1c489ffb977a77d4d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

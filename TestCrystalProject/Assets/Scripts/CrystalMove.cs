@@ -11,6 +11,8 @@ public class CrystalMove : MonoBehaviour {
     Vector3 velocity;
     //Vector3 angle;
     Vector3 destination;
+    GameObject lastDestObject;
+    float randomSpeed;
 
     void Start () {
         managerClass = GameObject.Find("Crystals").GetComponent<CrystalManager>();
@@ -20,6 +22,8 @@ public class CrystalMove : MonoBehaviour {
         velocity = Vector3.zero;
         //angle = Vector3.zero;
         destination = Vector3.zero;
+        lastDestObject = null;
+        randomSpeed = Random.Range(1/managerClass.randomRate, managerClass.randomRate);
     }
 	
 	void Update () {
@@ -58,6 +62,7 @@ public class CrystalMove : MonoBehaviour {
                 {
                     averagePosition += managerClass.crystalObjects[i].transform.position;
                     averageVelocity += managerClass.crystalClasses[i].velocity;
+                    lastDestObject = managerClass.crystalObjects[i];               //最後に視界に入っていた水晶
                     count++;
                 }
                 //分離処理
@@ -72,6 +77,12 @@ public class CrystalMove : MonoBehaviour {
             //count++;
             averagePosition /= count;   //平均位置（自身を含めない）
             averageVelocity /= count;
+        }
+        //対象がいなかった場合、最後の目標水晶へ送る
+        else if (lastDestObject)
+        {
+            Vector3 diff = lastDestObject.transform.position - transform.position;
+            averagePosition = diff;
         }
         //対象がいなかった場合、リーダー位置へ向かう（平均しない）
         else
@@ -136,14 +147,16 @@ public class CrystalMove : MonoBehaviour {
     //動く
     void MoveCrystal()
     {
-        velocity = destination.normalized * managerClass.moveSpeed * Time.deltaTime;
-        this.transform.position += velocity * managerClass.applicability;
+        //velocity = destination.normalized * managerClass.moveSpeed * Time.deltaTime;
+        Vector3 diff = managerClass.targetObject.transform.position - transform.position;
+        velocity = destination.normalized * managerClass.applicability + diff.normalized * (1f - managerClass.applicability);
+        velocity *= managerClass.moveSpeed * randomSpeed * Time.deltaTime;
+        this.transform.position += velocity;
     }
 
     //個体の進行方向に合わせて回転させる
     void RotateCrystal(Vector3 velocity)
     {
-        Vector3 rotatePos = this.transform.position + Vector3.Lerp(this.transform.forward, destination.normalized, managerClass.turnRate);
-        this.transform.LookAt(rotatePos);
+        this.transform.LookAt(this.transform.position + velocity.normalized);
     }
 }

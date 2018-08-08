@@ -90,9 +90,6 @@ public class CrystalMove : MonoBehaviour {
             Vector3 diff = managerClass.targetObject.transform.position - transform.position;
             averagePosition = diff;
         }
-        //averagePosition = managerClass.targetObject.transform.position - transform.position;  //デバッグ用、全員ターゲットを目指す
-        //averagePosition += managerClass.targetObject.transform.position - transform.position;
-        //averagePosition /= 2;
 
         if (transform.GetSiblingIndex() != 0) return;   //テスト用
         managerClass.centerMark.transform.position = averagePosition;   //確認用マーカーを動かす

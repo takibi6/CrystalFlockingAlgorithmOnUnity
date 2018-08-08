@@ -330,6 +330,8 @@
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Scripts\CrystalManager.cs" />
     <Compile Include="Assets\Scripts\CrystalMove.cs" />
+    <Compile Include="Assets\Scripts\MovingStraight.cs" />
+    <Compile Include="Assets\Scripts\MovingToTarget.cs" />
     <Compile Include="Assets\Scripts\PointingController.cs" />
   </ItemGroup>
   <ItemGroup>

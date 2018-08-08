@@ -232,7 +232,7 @@ MonoBehaviour:
   ground: {fileID: 25657980}
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!23 &381761576
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 571409079}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 30, z: -30}
+  m_LocalPosition: {x: 0, y: 50, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -505,19 +505,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crystalNum: 30
+<<<<<<< HEAD
   randomSetupPosition: 3
+=======
+  randomSetupPosition: 10
+>>>>>>> sub
   searchDistance: 10
   crystalGetAngle: 0.5
-  moveSpeed: 1
+  moveSpeed: 30
+  freeSpeed: 0.5
+  randomRate: 2
+  turnRate: 0.1
   lateSpeed: 30
   keepDistance: 5
-  disorder: 0.5
+  applicability: 0.5
   crystalPrefab: {fileID: 1009155331820490, guid: 44bb99bd1040757498adb2f1df19903f,
     type: 2}
   targetObject: {fileID: 381761574}
   centerMark: {fileID: 860740159}
   crystalObjects: []
   crystalClasses: []
+  crystalVelocity: []
 --- !u!1 &2027870085
 GameObject:
   m_ObjectHideFlags: 0

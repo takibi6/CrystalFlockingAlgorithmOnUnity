@@ -5,13 +5,32 @@ using UnityEngine;
 public class CrystalMove : MonoBehaviour {
 
     CrystalManager managerClass;
+<<<<<<< HEAD
     Vector3 averagePosition = Vector3.zero;
     Vector3 averageVelocity = Vector3.zero;
     //Vector3 acceleration = Vector3.zero;
     Vector3 velocity = Vector3.zero;
+=======
+    Vector3 averagePosition;
+    Vector3 averageVelocity;
+    //Vector3 acceleration;
+    Vector3 velocity;
+    //Vector3 angle;
+    Vector3 destination;
+    GameObject lastDestObject;
+    float randomSpeed;
+>>>>>>> sub
 
     void Start () {
         managerClass = GameObject.Find("Crystals").GetComponent<CrystalManager>();
+        averagePosition = Vector3.zero;
+        averageVelocity = Vector3.zero;
+        //acceleration = Vector3.zero;
+        velocity = Vector3.zero;
+        //angle = Vector3.zero;
+        destination = Vector3.zero;
+        lastDestObject = null;
+        randomSpeed = Random.Range(1/managerClass.randomRate, managerClass.randomRate);
     }
 	
 	void Update () {
@@ -23,13 +42,15 @@ public class CrystalMove : MonoBehaviour {
 
         MoveCrystal();
         RotateCrystal(velocity);
-	}
+    }
 
     void InitParam()
     {
-        velocity = Vector3.zero;
+        //acceleration = Vector3.zero;
+        //velocity = Vector3.zero;
         averagePosition = Vector3.zero;
         averageVelocity = Vector3.zero;
+        destination = Vector3.zero;
     }
 
     //探索
@@ -48,6 +69,7 @@ public class CrystalMove : MonoBehaviour {
                 {
                     averagePosition += managerClass.crystalObjects[i].transform.position;
                     averageVelocity += managerClass.crystalClasses[i].velocity;
+                    lastDestObject = managerClass.crystalObjects[i];               //最後に視界に入っていた水晶
                     count++;
                 }
                 //分離処理
@@ -63,13 +85,22 @@ public class CrystalMove : MonoBehaviour {
             averagePosition /= count;   //平均位置（自身を含めない）
             averageVelocity /= count;
         }
+        //対象がいなかった場合、最後の目標水晶へ送る
+        else if (lastDestObject)
+        {
+            Vector3 diff = lastDestObject.transform.position - transform.position;
+            averagePosition = diff;
+        }
         //対象がいなかった場合、リーダー位置へ向かう（平均しない）
         else
         {
             Vector3 diff = managerClass.targetObject.transform.position - transform.position;
             averagePosition = diff;
         }
+<<<<<<< HEAD
         //averagePosition = managerClass.targetObject.transform.position - transform.position;  //デバッグ用、全員ターゲットを目指す
+=======
+>>>>>>> sub
 
         if (transform.GetSiblingIndex() != 0) return;   //テスト用
         managerClass.centerMark.transform.position = averagePosition;   //確認用マーカーを動かす
@@ -96,7 +127,9 @@ public class CrystalMove : MonoBehaviour {
         //Vector3 diff = averagePosition - this.transform.position;
         //if (diff.magnitude < managerClass.keepDistance) return;     //分離を優先
         
-        velocity = velocity * managerClass.disorder + averagePosition * (1f - managerClass.disorder);
+        destination += averagePosition;
+        //angle = destination;
+        //velocity *= velocity.magnitude;
     }
 
 
@@ -107,21 +140,30 @@ public class CrystalMove : MonoBehaviour {
         //Debug.Log(diff.magnitude);
         
         float removeVelocity = managerClass.keepDistance / diff.magnitude;
+<<<<<<< HEAD
         velocity += diff.normalized * removeVelocity;
+=======
+        destination += diff.normalized * removeVelocity;
+>>>>>>> sub
     }
 
 
     //整列：平均速度ベクトルに合わせる
     void DoAlignment()
     {
-        velocity += velocity * managerClass.disorder + averageVelocity * (1f - managerClass.disorder);
+        destination += averageVelocity;
+        //angle += destination;
     }
 
-
+    
     //動く
     void MoveCrystal()
     {
-        this.transform.position += velocity * Time.deltaTime * managerClass.moveSpeed;
+        //velocity = destination.normalized * managerClass.moveSpeed * Time.deltaTime;
+        Vector3 diff = managerClass.targetObject.transform.position - transform.position;
+        velocity = destination.normalized * managerClass.applicability + diff.normalized * (1f - managerClass.applicability);
+        velocity *= managerClass.moveSpeed * randomSpeed * Time.deltaTime;
+        this.transform.position += velocity;
     }
 
     //個体の進行方向に合わせて回転させる

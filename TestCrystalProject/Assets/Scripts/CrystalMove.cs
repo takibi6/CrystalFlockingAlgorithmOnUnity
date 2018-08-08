@@ -7,7 +7,7 @@ public class CrystalMove : MonoBehaviour {
     CrystalManager managerClass;
     Vector3 averagePosition;
     Vector3 averageVelocity;
-    //Vector3 acceleration;
+    Vector3 acceleration;
     Vector3 velocity;
     //Vector3 angle;
     Vector3 destination;
@@ -18,7 +18,7 @@ public class CrystalMove : MonoBehaviour {
         managerClass = GameObject.Find("Crystals").GetComponent<CrystalManager>();
         averagePosition = Vector3.zero;
         averageVelocity = Vector3.zero;
-        //acceleration = Vector3.zero;
+        acceleration = Vector3.zero;
         velocity = Vector3.zero;
         //angle = Vector3.zero;
         destination = Vector3.zero;
@@ -39,7 +39,7 @@ public class CrystalMove : MonoBehaviour {
 
     void InitParam()
     {
-        //acceleration = Vector3.zero;
+        acceleration = Vector3.zero;
         //velocity = Vector3.zero;
         averagePosition = Vector3.zero;
         averageVelocity = Vector3.zero;
@@ -90,9 +90,6 @@ public class CrystalMove : MonoBehaviour {
             Vector3 diff = managerClass.targetObject.transform.position - transform.position;
             averagePosition = diff;
         }
-        //averagePosition = managerClass.targetObject.transform.position - transform.position;  //デバッグ用、全員ターゲットを目指す
-        //averagePosition += managerClass.targetObject.transform.position - transform.position;
-        //averagePosition /= 2;
 
         if (transform.GetSiblingIndex() != 0) return;   //テスト用
         managerClass.centerMark.transform.position = averagePosition;   //確認用マーカーを動かす
@@ -120,8 +117,6 @@ public class CrystalMove : MonoBehaviour {
         //if (diff.magnitude < managerClass.keepDistance) return;     //分離を優先
         
         destination += averagePosition;
-        //angle = destination;
-        //velocity *= velocity.magnitude;
     }
 
 
@@ -140,17 +135,17 @@ public class CrystalMove : MonoBehaviour {
     void DoAlignment()
     {
         destination += averageVelocity;
-        //angle += destination;
     }
 
     
     //動く
     void MoveCrystal()
     {
-        //velocity = destination.normalized * managerClass.moveSpeed * Time.deltaTime;
         Vector3 diff = managerClass.targetObject.transform.position - transform.position;
-        velocity = destination.normalized * managerClass.applicability + diff.normalized * (1f - managerClass.applicability);
-        velocity *= managerClass.moveSpeed * randomSpeed * Time.deltaTime;
+        acceleration = destination.normalized * managerClass.applicability + diff.normalized * (1f - managerClass.applicability);
+        velocity = velocity * (1f - managerClass.turnRate) + acceleration * managerClass.turnRate;
+        //acceleration *= managerClass.moveSpeed * randomSpeed * Time.deltaTime;
+        velocity += acceleration * managerClass.moveSpeed * randomSpeed * Time.deltaTime;
         this.transform.position += velocity;
     }
 

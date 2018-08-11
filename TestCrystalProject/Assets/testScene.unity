@@ -397,7 +397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &860740160
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -504,22 +504,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36852cbf00fd42347bcb5944a3834d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crystalNum: 30
-<<<<<<< HEAD
-  randomSetupPosition: 3
-=======
+  crystalNum: 100
   randomSetupPosition: 10
->>>>>>> sub
   searchDistance: 10
-  crystalGetAngle: 0.5
-  moveSpeed: 30
+  crystalGetAngle: 0
+  moveSpeed: 8
   freeSpeed: 0.5
-  randomRate: 2
-  turnRate: 0.1
-  lateSpeed: 30
+  randomRate: 3
+  turnRate: 0.02
   keepDistance: 5
-  applicability: 0.5
-  crystalPrefab: {fileID: 1009155331820490, guid: 44bb99bd1040757498adb2f1df19903f,
+  applicability: 0.3
+  crystalPrefab: {fileID: 1334199070706278, guid: c3986e3d5e630ce4189abd44c05a083f,
     type: 2}
   targetObject: {fileID: 381761574}
   centerMark: {fileID: 860740159}

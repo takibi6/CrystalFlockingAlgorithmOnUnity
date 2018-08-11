@@ -12,7 +12,7 @@ public class CrystalManager : MonoBehaviour {
     public float freeSpeed;
     public float randomRate;
     public float turnRate;
-    public float lateSpeed;
+    //public float lateSpeed;
     public float keepDistance;
     public float applicability;
 
